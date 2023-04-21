@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { AuthRouter } from "./routes/auth.js"
+import { secureAuth } from "./middleware/secure.js"
 
 dotenv.config();
 
@@ -29,6 +30,12 @@ app.use(
 app.get('/', (_req, res) => {
   res.render('home');
 });
+
+app.get('/dashboard', secureAuth , (req, res) => {
+  const name = req.session.name;
+  const firstName = req.session.firstname;
+  res.render('dashboard', { name , firstName});
+})
 
 app.use(AuthRouter);
 

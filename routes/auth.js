@@ -5,11 +5,11 @@ const router = express.Router();
 
 
 router.get('/signup', (_req, res) => {
-  res.render('signup');
+  res.render('signup', { error: null});
 });
 
 router.get('/login', (_req, res) => {
-  res.render('login');
+  res.render('login', { error: null});
 });
 
 router.post('/signup', signup);
