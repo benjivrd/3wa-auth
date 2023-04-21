@@ -35,6 +35,7 @@ export async function signup(req, res) {
           password: hash,
         });
         await newUser.save();
+        req.flash('success', 'Inscription réussis !')
         res.redirect("/login");
       }
     } catch (error) {
@@ -63,6 +64,7 @@ export async function login(req, res) {
       req.session.lastName = user.lastName;
       req.session.firstName = user.firstName;
       req.session.email = user.email;
+      req.flash('success', ' Authentification réussie !');
       res.redirect("/dashboard");
     }
   } catch (error) {

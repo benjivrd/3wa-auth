@@ -21,4 +21,21 @@
       </ul>
     </nav>
   </body>
-</html>
+   <% if (flash_success) { %>
+   <% flash_success.forEach(msg => { %>
+    <div class="flash-success" name="flash-msg">>
+      <span><%= msg %></span>
+    </div>
+   <% }) %>
+   <% } %>
+
+   <script>
+    const msgEls = document.getElementsByName('flash-msg');
+    if(msgEls != undefined){
+      msgEls.forEach(msg => {
+        setTimeout(() => {
+          msg.style.display = "none";
+        }, 3000)
+      })
+    }
+   </script>

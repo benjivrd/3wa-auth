@@ -107,10 +107,15 @@ form button{
   border-radius: 25px;
 }
 
-.success{
+.flash-success{
+  position: absolute;
+  height: 45px;
+  top: 75px;
+  right: 15px;
   background-color: rgb(0, 255, 0, 0.4);
   padding: 15px;
   color: rgb(7, 41, 9);
   font-weight: 400;
   border-radius: 25px;
+  transition: display 300ms ease-in;
 }

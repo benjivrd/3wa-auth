@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import flash from "connect-flash";
 import mongoose from "mongoose";
 import { AuthRouter } from "./routes/auth.js"
 import { IndexRouter } from "./routes/index.js"
@@ -27,8 +28,11 @@ app.use(
   })
 );
 
+app.use(flash());
+
 app.use((req, _res, next) => {
   app.locals.isConnected = req.session.isConnected;
+  app.locals.flash_success = req.flash("success");
   next();
 })
 
@@ -37,6 +41,7 @@ app.use((req, _res, next) => {
 app.use(IndexRouter);
 app.use(AuthRouter);
 app.use(DashboardRouter);
+
 
 try {
   await mongoose.connect(process.env.DB_MONGO, {
