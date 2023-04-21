@@ -6,7 +6,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { AuthRouter } from "./routes/auth.js"
-import { secureAuth } from "./middleware/secure.js"
+import { IndexRouter } from "./routes/index.js"
+import { DashboardRouter } from "./routes/dashboard.js"
 
 dotenv.config();
 
@@ -17,7 +18,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -27,25 +27,16 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
   app.locals.isConnected = req.session.isConnected;
   next();
 })
 
-app.get('/', (_req, res) => {
-  res.render('home');
-});
 
 
-
-app.get('/dashboard', secureAuth , (req, res) => {
-  const lastName = req.session.lastName;
-  const firstName = req.session.firstName;
-  const email = req.session.email;
-  res.render('dashboard', { lastName , firstName, email});
-})
-
+app.use(IndexRouter);
 app.use(AuthRouter);
+app.use(DashboardRouter);
 
 try {
   await mongoose.connect(process.env.DB_MONGO, {
