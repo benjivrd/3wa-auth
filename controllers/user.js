@@ -41,10 +41,14 @@ export async function login(req, res) {
   const user = await User.findOne({ email });
   if (!user) {
     errors.push({ msg: "Cet email est incorrect" });
+    res.render("login", { errors });
+    return;
   }
 
   if(!bcrypt.compareSync(password, user.password)){
     errors.push({ msg: "Le mot de passe est incorrect" });
+    res.render("login", { errors, email, password });
+    return;
   }
 
   if(errors.length > 0){
