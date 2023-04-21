@@ -27,6 +27,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  app.locals.isConnected = req.session.isConnected;
+  next();
+})
+
 app.get('/', (_req, res) => {
   res.render('home');
 });
