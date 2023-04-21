@@ -43,7 +43,7 @@ export async function login(req, res) {
     errors.push({ msg: "Cet email est incorrect" });
   }
 
-  if(bcrypt.compare(password, user.password)){
+  if(!bcrypt.compare(password, user.password)){
     errors.push({ msg: "Le mot de passe est incorrect" });
   }
 
