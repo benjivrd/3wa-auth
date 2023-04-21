@@ -9,16 +9,22 @@
   </head>
   <body>
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <% if (isConnected) { %>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/logout">Deconnexion</a></li>
-        <% }else {%>
-        <li><a href="/signup">Inscription</a></li>
-        <li><a href="/login">Connexion</a></li>
-        <% } %>
-      </ul>
+      <div class="nav-container">
+        <div class="nav-left">
+          <a href="/">Home</a>
+        </div>
+       <div class="nav-right">
+        <ul>
+          <% if (isConnected) { %>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/logout">Deconnexion</a></li>
+          <% }else {%>
+          <li><a href="/signup">Inscription</a></li>
+          <li><a href="/login">Connexion</a></li>
+          <% } %>
+        </ul>
+       </div>
+      </div>
     </nav>
   </body>
    <% if (flash_success) { %>

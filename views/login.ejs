@@ -8,10 +8,18 @@
                      <span class="error"><%= err.msg %></span>
                     <% }) %>
                    <% } %>
-              <label for="name">Email:</label>
-              <input type="email" name="email" id="email" required />
+              <label for="email">Email:</label>
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 2) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="email" name="email" id="email" required />
               <label for="password">Mot de passe:</label>
-              <input type="password" name="password" id="password" required />
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 1) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="password" name="password" id="password" required />
               <button type="submit">Connexion</button>
             </div>
           </form>

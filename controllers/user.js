@@ -2,35 +2,34 @@ import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 
 export async function signup(req, res) {
-  const { firstName, lastName, email, password, repassword } = req.body;
+  const { firstname, lastname, email, password, repassword } = req.body;
   let errors = [];
-  if (!firstName || !lastName || !email || !password || !repassword) {
-    errors.push({ msg: "Veuillez remplir tous les champs" });
+  if (!firstname || !lastname || !email || !password || !repassword) {
+    errors.push({ code: 1, msg: "Veuillez remplir tous les champs" });
   }
 
   if (password.length < 6) {
-    errors.push({ msg: "Le mot de passe doit contenir au moins 6 caractères" });
+    errors.push({ code: 2, msg: "Le mot de passe doit contenir au moins 6 caractères" });
   }
 
   if (password !== repassword) {
-    errors.push({ msg: "Les mots de passe ne sont pas identiques" });
+    errors.push({ code: 3, msg: "Les mots de passe ne sont pas identiques" });
   }
 
   if (errors.length > 0) {
-    res.render("signup", { errors, firstName, lastName, email, password });
-    console.log(errors);
+    res.render("signup", { errors, firstname, lastname, email, password });
   } else {
     try {
       const userExists = await User.findOne({ email: email });
       if (userExists) {
-        errors.push({ msg: "Cet email est déjà utilisé" });
-        res.render("signup", { errors, firstName, lastName, email, password });
+        errors.push({ code: 4 , msg: "Cet email est déjà utilisé" });
+        res.render("signup", { errors, firstname, lastname, email, password });
       } else {
         const salt = await bcrypt.genSalt(parseInt(process.env.SALT));
         const hash = await bcrypt.hash(password, salt);
         const newUser = new User({
-          firstName,
-          lastName,
+          firstname,
+          lastname,
           email,
           password: hash,
         });
@@ -51,10 +50,10 @@ export async function login(req, res) {
     const user = await User.findOne({ email });
     if (user) {
       if (!bcrypt.compareSync(password, user?.password)) {
-        errors.push({ msg: "Le mot de passe est incorrect" });
+        errors.push({ code: 1, msg: "Le mot de passe est incorrect" });
       }
     } else {
-      errors.push({ msg: "Cet email est incorrect" });
+      errors.push({ code: 2, msg: "Cet email est incorrect" });
     }
 
     if (errors.length > 0) {

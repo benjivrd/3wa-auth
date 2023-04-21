@@ -9,15 +9,35 @@
                     <% }) %>
                    <% } %>
               <label for="email">Email:</label>
-              <input type="email" name="email" id="email" required />
-              <label for="name">Nom:</label>
-              <input type="text" name="lastName" id="lastName" required />
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 4) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="email" name="email" id="email" required />
+              <label for="lastname">Nom:</label>
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 1) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="text" name="lastname" id="lastname" required />
               <label for="firstname">Prénom</label>
-              <input type="text" name="firstName" id="firstName" required />
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 1) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="text" name="firstname" id="firstname" required />
               <label for="password">Mot de passe</label>
-              <input type="password" name="password" id="password" required />
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 2 || err.code === 1) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="password" name="password" id="password" required />
               <label for="repassword">Confirmer mot de passe</label>
-              <input type="password" name="repassword" id="repassword" required />
+              <input <% errors?.forEach(err => { %>
+                <% if (err.code === 3 || err.code === 1) { %>
+                    class="input-error" <% } %>
+              <% }) %>
+              type="password" name="repassword" id="repassword" required />
               <button type="submit">Inscription</button>
             </div>
           </form>
