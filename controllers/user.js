@@ -43,7 +43,7 @@ export async function login(req, res) {
     errors.push({ msg: "Cet email est incorrect" });
   }
 
-  if(!bcrypt.compare(password, user.password)){
+  if(!bcrypt.compareSync(password, user.password)){
     errors.push({ msg: "Le mot de passe est incorrect" });
   }
 
@@ -51,7 +51,7 @@ export async function login(req, res) {
     res.render("login", { errors, email, password });
   } else {
     req.session.isConnected = true;
-    req.session.name = user.name;
+    req.session.lastName = user.lastName;
     req.session.firstName = user.firstName;
     req.session.email = user.email;
     res.redirect("/dashboard");

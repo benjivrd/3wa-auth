@@ -31,10 +31,13 @@ app.get('/', (_req, res) => {
   res.render('home');
 });
 
+
+
 app.get('/dashboard', secureAuth , (req, res) => {
-  const name = req.session.name;
-  const firstName = req.session.firstname;
-  res.render('dashboard', { name , firstName});
+  const lastName = req.session.lastName;
+  const firstName = req.session.firstName;
+  const email = req.session.email;
+  res.render('dashboard', { lastName , firstName, email});
 })
 
 app.use(AuthRouter);
