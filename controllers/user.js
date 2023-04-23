@@ -57,7 +57,7 @@ export async function login(req, res) {
     }
 
     if (errors.length > 0) {
-      res.render("login", { errors });
+      res.render("login", { errors , email, password});
     } else {
       req.session.isConnected = true;
       req.session.lastName = user.lastName;

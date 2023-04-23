@@ -11,32 +11,32 @@
               <label for="email">Email:</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 4) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% }
+                    else {  %> value=<%= email %> <% }})%>      
               type="email" name="email" id="email" required />
               <label for="lastname">Nom:</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 1) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% } 
+                    else {  %> value=<%= lastname %> <% }})%>      
               type="text" name="lastname" id="lastname" required />
               <label for="firstname">Prénom</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 1) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% } 
+              else {  %> value=<%= firstname %> <% }})%>       
               type="text" name="firstname" id="firstname" required />
               <label for="password">Mot de passe</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 2 || err.code === 1) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% }
+                    else {  %> value=<%= password %> <% }})%>      
               type="password" name="password" id="password" required />
               <label for="repassword">Confirmer mot de passe</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 3 || err.code === 1) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% } 
+                     else {  %> value=<%= password %> <% }})%>      
               type="password" name="repassword" id="repassword" required />
               <button type="submit">Inscription</button>
             </div>

@@ -11,14 +11,14 @@
               <label for="email">Email:</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 2) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% }
+                    else {  %> value=<%= email %> <% }})%>      
               type="email" name="email" id="email" required />
               <label for="password">Mot de passe:</label>
               <input <% errors?.forEach(err => { %>
                 <% if (err.code === 1) { %>
-                    class="input-error" <% } %>
-              <% }) %>
+                    class="input-error" <% } 
+                     else {  %> value=<%= password %> <% }})%>      
               type="password" name="password" id="password" required />
               <button type="submit">Connexion</button>
             </div>
