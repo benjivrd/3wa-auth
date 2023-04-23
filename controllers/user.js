@@ -28,8 +28,8 @@ export async function signup(req, res) {
         const salt = await bcrypt.genSalt(parseInt(process.env.SALT));
         const hash = await bcrypt.hash(password, salt);
         const newUser = new User({
-          firstname,
-          lastname,
+          firstName: firstname,
+          lastName: lastname,
           email,
           password: hash,
         });
